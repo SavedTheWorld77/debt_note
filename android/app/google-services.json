@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1485684422",
+    "project_id": "debt-note-f4e10",
+    "storage_bucket": "debt-note-f4e10.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1485684422:android:d3d2d39b7ef24a1fb1a1c7",
+        "android_client_info": {
+          "package_name": "com.example.debt_note"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5z6IPd8YTHH3LbASdxEd75L5brAzbPHY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
