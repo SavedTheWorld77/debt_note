@@ -1,34 +1,28 @@
 import 'package:bloc/bloc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:debt_note/di.dart';
 import 'package:debt_note/src/features/auth/data/data_sources/remote/firebase_auth_service.dart';
-import 'package:debt_note/src/features/auth/data/repository/auth_repository_impl.dart';
+import 'package:debt_note/src/features/auth/domain/entities/user.dart';
+import 'package:debt_note/src/features/auth/domain/usecases/login_user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
 
-import '../../domain/repository/auth_repository.dart';
+part 'login_event.dart';
+part 'login_state.dart';
 
-part 'login_bloc_event.dart';
-part 'login_bloc_state.dart';
-
-class LoginBlocBloc extends Bloc<LoginBlocEvent, LoginBlocState> {
-  LoginBlocBloc() : super(LoginBlocInitial()) {
-    on<Login>((event, Emitter<LoginBlocState> emit) async {
-      // TODO: implement event handler
+class LoginBloc extends Bloc<LoginEvent, LoginState> {
+  final LoginUserUseCase _loginUserUseCase;
+  LoginBloc(this._loginUserUseCase) : super(LoginInitial()) {
+    on<Login>((event, Emitter<LoginState> emit) async {
       print("onLogin");
-      // AuthRepositoryImpl().register("Sunbae@gmail.com", "Dancer@1");
-      await locator<AuthRepository>()
-          .login("Sunbae@gmail.com", "Dancer@1")
-          .then((value) {
-        print(value.fold((l) => null, (r) => print(r.user!.uid)));
-      });
+      await _loginUserUseCase(params: event.user).then((value) => value.fold(
+          (l) => print("nag error"), (r) => print("shit ${r.user!.uid}")));
     });
 
-    on<LoginTest>((event, Emitter<LoginBlocState> emit) async {
+    on<LoginTest>((event, Emitter<LoginState> emit) async {
       addReminderToFirebase();
     });
 
-    on<LoginTest1>((event, Emitter<LoginBlocState> emit) async {
+    on<LoginTest1>((event, Emitter<LoginState> emit) async {
       logOut();
     });
   }

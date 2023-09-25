@@ -1,10 +1,12 @@
-import 'package:debt_note/src/features/auth/presentation/bloc/login_bloc_bloc.dart';
+import 'package:debt_note/di.dart';
+import 'package:debt_note/src/features/auth/domain/entities/user.dart';
+import 'package:debt_note/src/features/auth/presentation/bloc/login_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
-  LoginBlocBloc loginBloc = LoginBlocBloc();
+  LoginBloc loginBloc = locator<LoginBloc>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,13 +20,16 @@ class LoginPage extends StatelessWidget {
           child: Column(
             children: [
               FloatingActionButton(onPressed: () {
-                loginBloc.add(Login());
+                loginBloc.add(Login(
+                    user: UserLogin(
+                        email: "rhen.noriega7@gmail.com",
+                        password: "password")));
               }),
               FloatingActionButton(onPressed: () {
                 loginBloc.add(LoginTest());
               }),
               FloatingActionButton(onPressed: () {
-                loginBloc.add(LoginTest1());
+                // loginBloc.add(LoginTest1());
               }),
             ],
           ),
