@@ -3,7 +3,7 @@ import 'package:debt_note/src/core/firebase_helpers.dart';
 import 'package:debt_note/src/features/manage_debt/domain/entities/debt.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-abstract class ManageDebtService {
+class ManageDebtService {
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
 
   Future<QuerySnapshot<Map<String, dynamic>>> getActiveDebts() async {
