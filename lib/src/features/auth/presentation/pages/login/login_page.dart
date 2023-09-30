@@ -1,6 +1,7 @@
 import 'package:debt_note/di.dart';
 import 'package:debt_note/src/features/auth/domain/entities/user.dart';
 import 'package:debt_note/src/features/auth/presentation/bloc/login_bloc.dart';
+import 'package:debt_note/src/features/auth/presentation/widgets/title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -10,28 +11,18 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Login"),
-        centerTitle: true,
-      ),
       body: BlocProvider(
         create: (BuildContext context) => loginBloc,
         child: SafeArea(
-          child: Column(
-            children: [
-              FloatingActionButton(onPressed: () {
-                loginBloc.add(Login(
-                    user: UserLogin(
-                        email: "rhen.noriega7@gmail.com",
-                        password: "password")));
-              }),
-              FloatingActionButton(onPressed: () {
-                loginBloc.add(LoginTest());
-              }),
-              FloatingActionButton(onPressed: () {
-                // loginBloc.add(LoginTest1());
-              }),
-            ],
+          child: SizedBox(
+            width: double.infinity,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(height: 0.05 * MediaQuery.of(context).size.height),
+                const DebtNoteTitle()
+              ],
+            ),
           ),
         ),
       ),
